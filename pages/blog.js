@@ -37,8 +37,10 @@ console.log(blogs)
        <main className={style.main}>
       <div className={style.grid}>
     {blogs && blogs.map((BlogItem)=>{
-      return <a key={BlogItem._id} href={`/blogpost/${BlogItem.slug}`} className={style.card}>
+  
+      return <a key={BlogItem._id} href={`/blogpost/${BlogItem._id}`} className={style.card}>
         <h2>{BlogItem.title} &rarr;</h2>
+        
         <p>{BlogItem.content.substr(0,100)}</p>
       </a>
     })}
