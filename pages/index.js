@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 import homeimg from "../public/homeimg.jpg";
 import Link from 'next/link';
 export default function Home() {
-  console.log(styles);
+  
   return (
     <div className={styles.container}>
     

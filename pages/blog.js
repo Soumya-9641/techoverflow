@@ -1,58 +1,47 @@
 import { handleClientScriptLoad } from "next/script";
 import React, { useEffect, useState } from "react";
 import style from "../styles/Blog.module.css"
-import hello from "./api/hello.js";
+import createblog from "./models/createblog"
+import mongoose from 'mongoose';
+import blogs from "./api/blogs.js";
 import * as fs from "fs";
 import InfiniteScroll from 'react-infinite-scroll-component';
-const Blog = (props) => {
-  console.log(props)
-  const [blogs,setBlogs] = useState(props.myprops);
-  // const fetchData = () => {
-  //   // a fake async api call like which sends
-  //   // 20 more records in 1.5 secs
-  //   setTimeout(() => {
-  //     this.setState({
-  //       items: this.state.items.concat(Array.from({ length: 20 }))
-  //     });
-  //   }, 1500);
-  // };
+const Blog =({blogs}) => {
+  //console.log(props)
+  //const [blogs,setBlogs] = useState([props.data]);
+ //const [userdata, setUserdata] = useState()
+//   try{
+//     const res = await fetch("http://localhost:3000/api/blogs",{
+//       method:"GET", 
+//       headers:{
+//         Accept:"application/json",
+//         "Content-Type" : "application/json"
+//       },
+//       credentials:"include"
+//     })
+//     const data = await res.json();
+//     setUserdata(data);
+//     console.log(data);
+//     if(!res.status===200){
+//       const error = new Error(res.error)
+//       throw error;
+//     }
+// }catch(err){
+// console.log(err)
+// //navigate("/login"); 
+// }
+console.log(blogs)
+  
   return (
     <div className={style.container}>
        <main className={style.main}>
-
-        {/* <InfiniteScroll
-         dataLength={blogs.length} //This is important field to render the next data
-          next={fetchData}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-          endMessage={
-           <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
-           </p>
-  } 
->
-  <div className={style.grid}>
-    {blogs.map((BlogItem)=>{
-      return <a key={BlogItem.title} href={`/blogpost/${BlogItem.slug}`} className={style.card}>
-        <h2>{BlogItem.title} &rarr;</h2>
-        <p>{BlogItem.content.substr(0,100)}</p>
-      </a>
-    })}
- 
-    </div>
-  {blogs}
-   
-</InfiniteScroll>  */}
-    
-    
       <div className={style.grid}>
-    {blogs.map((BlogItem)=>{
-      return <a key={BlogItem.title} href={`/blogpost/${BlogItem.slug}`} className={style.card}>
+    {blogs && blogs.map((BlogItem)=>{
+      return <a key={BlogItem._id} href={`/blogpost/${BlogItem.slug}`} className={style.card}>
         <h2>{BlogItem.title} &rarr;</h2>
         <p>{BlogItem.content.substr(0,100)}</p>
       </a>
     })}
- 
     </div>  
   </main>
 
@@ -61,19 +50,13 @@ const Blog = (props) => {
 }
 export async function getServerSideProps(context) {
   
- let data = await fetch('http://localhost:3000/api/hello')
- let myprops = await data.json()
- 
-//  .then((a)=>{
-//     return a.json();
-//   })
-//     .then((parsed)=>{
-       
-        
-//       setBlogs(parsed)
-//       })
+  if(!mongoose.connections[0].readyState){
+    await mongoose.connect("mongodb://localhost:27017/blogspot")
+  }
+  let blogs = await createblog.find()
+  //console.log(blogs)
   return {
-    props: {myprops}, // will be passed to the page component as props
+    props: {blogs:JSON.parse(JSON.stringify(blogs))}, // will be passed to the page component as props
   }
 }
 

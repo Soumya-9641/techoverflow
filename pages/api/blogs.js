@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import * as fs from "fs";
-export default async function hello(req, res) {
+export default async function blogs(req, res) {
   let data = await fs.promises.readdir("../weblog/blogsdata")
   let myfile
  let allblogs =[];
