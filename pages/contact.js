@@ -11,33 +11,20 @@ const Contact = () => {
     const [password,setPassword] = useState('');
     const [zip,setZip] = useState('');
     const [concern,setConcern] = useState('');
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
       e.preventDefault();
       //console.log(fName,lName,email,city,password,zip,concern);
       const data = { fName,lName,email,city,password,zip,concern };
 
-       fetch('http://localhost:3000/api/postcontact', {
+      let res = await fetch('http://localhost:3000/api/contact', {
       method: 'POST', // or 'PUT'
        headers: {
       'Content-Type': 'application/json',
   },
       body: JSON.stringify(data),
 })
-      .then((response) => response.text())
-       .then((data) => {
-      console.log('Success:', data);
-      alert("Thanks for contacting us!!We will reach you soon");
-      setFname('')
-      setLname('')
-      setEmail('')
-      setPassword('')
-      setCity('')
-      setZip('')
-      setConcern('')
-  })
-     .catch((error) => {
-     console.error('Error:', error);
-  });
+let response = await res.json();
+console.log(response) 
 
     }
     const handleChange= (e)=>{
