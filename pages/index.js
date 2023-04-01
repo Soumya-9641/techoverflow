@@ -4,7 +4,9 @@ import styles from '../styles/Home.module.css'
 //import Nav from './Nav.js';
 import homeimg from "../public/homeimg.jpg";
 import Link from 'next/link';
-export default function Home() {
+import createblog from "./models/createblog"
+import mongoose from 'mongoose';
+export default function Home({blogs}) {
   
   return (
     <div className={styles.container}>
@@ -48,33 +50,14 @@ export default function Home() {
       /> */}
       <section id='showblog'>
       <div className={styles.grid}>
-        <a href="https://techbootcamps.utexas.edu/blog/best-ways-to-learn-javascript/" className={styles.card}>
-          <h2>How to learn JavaScript in 2022 &rarr;</h2>
-          <p>JavaScript is the language to create a logic and design a the web.</p>
+            {blogs && blogs.map((BlogItem)=>{
+        
+        return <a key={BlogItem._id} href={`/blogpost/${BlogItem._id}`} className={styles.card}>
+          <h2>{BlogItem.title} &rarr;</h2>
+          
+          <p>{BlogItem.content.substr(0,100)}</p>
         </a>
-
-        <a href="https://radixweb.com/blog/nextjs-vs-react" className={styles.card}>
-          <h2>React vs React with Next.js &rarr;</h2>
-          <p>Advantages of using next.js istead of react</p>
-        </a>
-
-        <a
-          href="https://kenzie.snhu.edu/blog/front-end-vs-back-end-whats-the-difference/#:~:text=Front%20and%20back%20end%20developers,see%20(the%20server%20side)."
-          className={styles.card}
-        >
-          <h2>Frontend vs backend &rarr;</h2>
-          <p>How Frontend and Backend contribute in a website to run a effective functionality website.</p>
-        </a>
-
-        <a
-          href="https://blog.back4app.com/front-end-and-back-end-frameworks/"
-          className={styles.card}
-        >
-          <h2>All frameworks of Frontend and Backend  &rarr;</h2>
-          <p>
-            Here all types of Frontend and Backend framework is describe shortly.
-          </p>
-        </a>
+      })}  
       </div>
       </section>
     </main>
@@ -92,5 +75,17 @@ export default function Home() {
       </a>
     </footer>
   </div>
+ 
   )
+}
+export async function getServerSideProps(context) {
+  
+  if(!mongoose.connections[0].readyState){
+    await mongoose.connect("mongodb://localhost:27017/blogspot")
+  }
+  let blogs = await createblog.find()
+  //console.log(blogs)
+  return {
+    props: {blogs:JSON.parse(JSON.stringify(blogs))}, // will be passed to the page component as props
+  }
 }
