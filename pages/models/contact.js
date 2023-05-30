@@ -9,7 +9,7 @@ const contactSchema = new mongoose.Schema({
     city:{type:String,required:true},
     password:{type:String,required:true},
     zip:{type:Number,required:true},
-    concern:{type:String,required:true},
+    concern:{type:String,required:true},  
 },{timestamps:true});
 
 mongoose.models={};
