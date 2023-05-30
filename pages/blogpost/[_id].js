@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import * as fs from "fs";
 import { AiOutlineHeart } from 'react-icons/ai';
 
-const slug = ({Blog}) => {
+const Slug = ({Blog}) => {
   console.log(Blog)
   const [like, setLike] = useState(0)
   const handleClick=(e)=>{
@@ -62,7 +62,7 @@ const slug = ({Blog}) => {
 // export async function getStaticPaths() {
 //   return {
 //     paths: [{ params:{slug: 'how-to-learn-react'}},
-//            { params:{slug:'how-to-learn-javascript'}},
+//            { params:{:'how-to-learn-javascript'}},
 //            { params:{slug:'how-to-learn-next'}}
 //            ],
 //     fallback: true, // can also be true or 'blocking'
@@ -80,4 +80,4 @@ export async function getServerSideProps(context) {
   }
  }
 
-export default slug;
+export default Slug;
