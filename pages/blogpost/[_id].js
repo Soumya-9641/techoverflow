@@ -1,7 +1,8 @@
 import React ,{useState,useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles1 from "../../styles/BlogPost.module.css";
-import createblog from "../models/createblog"
+import createblog from "../../models/createblog"
+
 import mongoose from 'mongoose';
 import * as fs from "fs";
 import { AiOutlineHeart } from 'react-icons/ai';

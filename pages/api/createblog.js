@@ -1,5 +1,5 @@
-import connectDb from "../middlewares/mongoose";
-import createblog from "../models/createblog"
+import connectDb from "../../middlewares/mongoose";
+import createblog from "../../models/createblog"
 
 const handler = async(req,res)=>{
     if(req.method=='POST'){

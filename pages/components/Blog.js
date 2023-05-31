@@ -1,9 +1,10 @@
 import { handleClientScriptLoad } from "next/script";
 import React, { useEffect, useState } from "react";
-import style from "../styles/Blog.module.css"
-import createblog from "./models/createblog"
+import style from "../../styles/Blog.module.css"
+import createblog from "../../models/createblog"
+
 import mongoose from 'mongoose';
-import blogs from "./api/blogs.js";
+import blogs from "../api/blogs";
 import * as fs from "fs";
 import InfiniteScroll from 'react-infinite-scroll-component';
 const Blog =({blogs}) => {
@@ -53,9 +54,10 @@ console.log(blogs)
 export async function getServerSideProps(context) {
   
   if(!mongoose.connections[0].readyState){
-    await mongoose.connect("mongodb://localhost:27017/blogspot")
+    await mongoose.connect(`mongodb://localhost:27017/blogspot`)
   }
-  let blogs = await createblog.find()
+  const blogs1 = await createblog.find()
+  const blogs = blogs1.blogs || null;
   //console.log(blogs)
   return {
     props: {blogs:JSON.parse(JSON.stringify(blogs))}, // will be passed to the page component as props

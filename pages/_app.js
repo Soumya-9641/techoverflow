@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import 'tailwindcss/tailwind.css';
-import Nav from './Nav.js';
+import Nav from './components/Nav.js';
 
 function MyApp({ Component, pageProps }) {
   return<>

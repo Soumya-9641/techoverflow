@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 //import Nav from './Nav.js';
 import homeimg from "../public/homeimg.jpg";
 import Link from 'next/link';
-import createblog from "./models/createblog"
+import createblog from "../models/createblog"
 import mongoose from 'mongoose';
 export default function Home({blogs}) {
   
@@ -31,7 +31,7 @@ export default function Home({blogs}) {
       </p>
       <div className={styles.blog}>
         <div className={styles.create}>
-        <Link href="/Createblog">
+        <Link href="/components/Createblog">
         <button>Create Blog</button>
         </Link>
            

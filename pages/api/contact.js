@@ -1,5 +1,6 @@
-import connectDb from "../middlewares/mongoose";
-import contact from "../models/contact"
+
+import connectDb from "../../middlewares/mongoose";
+import contact from "../../models/contact"
 
 const handler = async(req,res)=>{
     if(req.method=='POST'){
