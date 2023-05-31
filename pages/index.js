@@ -31,7 +31,7 @@ export default function Home({blogs}) {
       </p>
       <div className={styles.blog}>
         <div className={styles.create}>
-        <Link href="/createblog">
+        <Link href="/Createblog">
         <button>Create Blog</button>
         </Link>
            

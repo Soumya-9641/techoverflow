@@ -12,17 +12,17 @@ function Nav() {
           </Link>
           </li> 
            <li>
-           <Link href="/contact">
+           <Link href="/Contact">
           <a> Contact Us </a>
            </Link>
            </li>
            <li>
-           <Link href="/blog">
+           <Link href="/Blog">
           <a> Blog</a>
           </Link>
            </li>
            <li>
-           <Link href="/about">
+           <Link href="/About">
           <a>About</a>
           </Link> 
            </li>

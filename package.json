@@ -22,8 +22,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
-    "eslint": "8.21.0",
-    "eslint-config-next": "12.2.3",
+    "eslint": "^8.41.0",
+    "eslint-config-next": "^13.4.4",
+    "eslint-plugin-next": "^0.0.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8"
   },
